@@ -82,11 +82,20 @@ export class RegisterComponent {
 
   private formatAuthError(err: any): string {
     const code = err?.code || '';
+    if (code === 'auth/operation-not-allowed') {
+      return 'Sign-up provider is disabled in Firebase. Please enable Email/Password in Firebase Console > Authentication > Sign-in method.';
+    }
+    if (code === 'auth/unauthorized-domain') {
+      return 'This domain is not authorized in Firebase. Add your domain in Firebase Console > Authentication > Settings > Authorized domains.';
+    }
     if (code === 'auth/email-already-in-use') {
-      return 'An account with this email already exists. Try logging in.';
+      return 'An account with this email already exists. Try signing in instead.';
     }
     if (code === 'auth/weak-password') {
       return 'Password should be at least 6 characters long.';
+    }
+    if (code === 'auth/network-request-failed') {
+      return 'Network error. Please check your internet connection.';
     }
     return err?.message || 'Failed to create account. Please try again.';
   }
