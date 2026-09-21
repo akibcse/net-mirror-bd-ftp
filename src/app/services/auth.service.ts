@@ -118,7 +118,24 @@ export class AuthService {
             } catch { /* ignore */ }
           }
 
-          const role: 'admin' | 'user' = (isAdminConfigured || existingData?.role === 'admin') ? 'admin' : 'user';
+          // For brand new users (no prior profile), check if they're the first ever
+          let isFirstUser = false;
+          if (!existingData) {
+            try {
+              const usersCol = collection(this.firebase.firestore, 'users');
+              const snap = await import('firebase/firestore').then(m =>
+                m.getDocs(m.query(usersCol, m.limit(1)))
+              );
+              isFirstUser = snap.empty || (snap.size === 1 && snap.docs[0].id === fbUser.uid);
+            } catch {
+              try {
+                const usersSnap = await get(ref(this.firebase.db, 'users'));
+                isFirstUser = !usersSnap.exists();
+              } catch { /* ignore */ }
+            }
+          }
+
+          const role: 'admin' | 'user' = (isAdminConfigured || existingData?.role === 'admin' || isFirstUser) ? 'admin' : 'user';
           const defaultDisplayName = fbUser.displayName || existingData?.displayName || (fbUser.phoneNumber ? `User ${fbUser.phoneNumber}` : (fbUser.email?.split('@')[0] || 'User'));
 
           const appUser: AppUser = {
@@ -220,7 +237,25 @@ export class AuthService {
 
     const now = Date.now();
     const isAdminConfigured = environment.adminEmails?.includes(email.toLowerCase());
-    const role: 'admin' | 'user' = isAdminConfigured ? 'admin' : 'user';
+
+    // Check if this is the very first user — if so, make them admin
+    let isFirstUser = false;
+    try {
+      const usersCol = collection(this.firebase.firestore, 'users');
+      const snap = await import('firebase/firestore').then(m =>
+        m.getDocs(m.query(usersCol, m.limit(1)))
+      );
+      // Only count other users (exclude this newly created uid)
+      isFirstUser = snap.empty || (snap.size === 1 && snap.docs[0].id === cred.user.uid);
+    } catch {
+      // Fallback: check RTDB
+      try {
+        const usersSnap = await get(ref(this.firebase.db, 'users'));
+        isFirstUser = !usersSnap.exists();
+      } catch { /* ignore */ }
+    }
+
+    const role: 'admin' | 'user' = (isAdminConfigured || isFirstUser) ? 'admin' : 'user';
     const telemetry = this.getClientTelemetry();
 
     const user: AppUser = {
