@@ -10,7 +10,7 @@ const https = require('https');
 
 const TMDB_API_KEY = 'a7711beafce9089f9791fc2a4c3a2b60';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
-const FIREBASE_RTDB_URL = 'https://streamflixbdd-default-rtdb.firebaseio.com';
+const FIREBASE_RTDB_URL = 'https://net-mirror-bd-ftp-default-rtdb.asia-southeast1.firebasedatabase.app';
 const FALLBACK_SITE_URL = 'https://streamflixbd.vercel.app';
 
 function fetchJson(url) {

@@ -6,6 +6,7 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyABoOxwmC-aXA2qd9ygzzCm4BEFQxEHCtk',
     authDomain: 'net-mirror-bd-ftp.firebaseapp.com',
+    databaseURL: 'https://net-mirror-bd-ftp-default-rtdb.asia-southeast1.firebasedatabase.app',
     projectId: 'net-mirror-bd-ftp',
     storageBucket: 'net-mirror-bd-ftp.firebasestorage.app',
     messagingSenderId: '373413651331',
