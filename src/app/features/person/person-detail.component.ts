@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+﻿import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
@@ -383,7 +383,7 @@ export class PersonDetailComponent implements OnInit {
         this.person.set(data);
         this.seoService.setMediaDetailMeta(
           `${data.name} — Biography, Movies & TV Shows`,
-          `Explore movies and TV series starring or directed by ${data.name}. Stream online on StreamFlix.`
+          `Explore movies and TV series starring or directed by ${data.name}. Stream online on Net Mirror BD.`
         );
 
         const cast = data.combined_credits?.cast || [];

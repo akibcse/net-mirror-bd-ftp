@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -1202,12 +1202,12 @@ export class MediaDetailComponent implements OnInit, OnDestroy {
     fetch$.subscribe({
       next: data => {
         this.media.set(data);
-        const title = data.title || data.name || 'StreamFlix';
+        const title = data.title || data.name || 'Net Mirror BD';
         const overview = data.overview || '';
         const poster = this.getPosterUrl(data.poster_path);
 
         this.seoService.setMediaDetailMeta(
-          `Watch ${title} Free Online — StreamFlix`,
+          `Watch ${title} Free Online — Net Mirror BD`,
           overview.slice(0, 160),
           poster,
           this.mediaType === 'movie' ? 'video.movie' : 'video.tv_show'
@@ -1314,7 +1314,7 @@ export class MediaDetailComponent implements OnInit, OnDestroy {
 
   shareTo(platform: string): void {
     const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(`Watch ${this.getTitle()} on StreamFlix!`);
+    const title = encodeURIComponent(`Watch ${this.getTitle()} on Net Mirror BD!`);
     let shareLink = '';
 
     if (platform === 'twitter') shareLink = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;

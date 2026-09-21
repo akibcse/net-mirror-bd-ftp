@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+﻿import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -164,7 +164,7 @@ import { environment } from '../../../environments/environment';
 
           <div class="danger-zone">
             <h3>Account Session</h3>
-            <button class="btn-logout" (click)="logout()">Sign Out of StreamFlix</button>
+            <button class="btn-logout" (click)="logout()">Sign Out of Net Mirror BD</button>
           </div>
         </div>
       </div>

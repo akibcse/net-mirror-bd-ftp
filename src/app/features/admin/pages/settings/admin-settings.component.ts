@@ -58,7 +58,7 @@ import { SiteSettings } from '../../../../models/media.model';
 
           <div class="form-group" *ngIf="site.announcement?.enabled">
             <label>Banner Message Text</label>
-            <input type="text" [(ngModel)]="announcementMessage" class="form-control" placeholder="Welcome to the newly updated StreamFlix platform!" />
+            <input type="text" [(ngModel)]="announcementMessage" class="form-control" placeholder="Welcome to the newly updated Net Mirror BD platform!" />
           </div>
         </div>
 
@@ -162,14 +162,14 @@ export class AdminSettingsComponent implements OnInit, OnDestroy {
   announcementMessage = '';
 
   site: SiteSettings = {
-    siteName: 'StreamFlix',
+    siteName: 'Net Mirror BD',
     siteTagline: 'Watch Movies & TV Series Online Free',
-    contactEmail: 'support@streamflix.io',
+    contactEmail: 'support@netmirrorbd.io',
     maintenanceMode: false,
     registrationOpen: true,
     announcement: {
       enabled: false,
-      message: 'Welcome to StreamFlix! Enjoy unlimited movies in full HD.',
+      message: 'Welcome to Net Mirror BD! Enjoy unlimited movies in full HD.',
       type: 'info'
     }
   };
@@ -190,7 +190,7 @@ export class AdminSettingsComponent implements OnInit, OnDestroy {
 
   toggleAnnouncement(): void {
     if (!this.site.announcement) {
-      this.site.announcement = { enabled: true, message: this.announcementMessage || 'Welcome to StreamFlix!', type: 'info' };
+      this.site.announcement = { enabled: true, message: this.announcementMessage || 'Welcome to Net Mirror BD!', type: 'info' };
     } else {
       this.site.announcement.enabled = !this.site.announcement.enabled;
     }

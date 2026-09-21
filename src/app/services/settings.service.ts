@@ -1,4 +1,4 @@
-import { Injectable, inject, NgZone } from '@angular/core';
+﻿import { Injectable, inject, NgZone } from '@angular/core';
 import { getDatabase, ref, set, get, push, update, remove, onValue } from 'firebase/database';
 import { FirebaseService } from './firebase.service';
 import { AuthService } from './auth.service';
@@ -31,7 +31,7 @@ export const DEFAULT_ADS: AdConfig[] = [
     id: 'ad-player-top',
     name: 'Player Top Banner (728x90)',
     position: 'player_top',
-    htmlCode: '<div style="background:linear-gradient(135deg,#1e1b4b,#312e81);color:#a5b4fc;padding:12px 20px;border-radius:8px;text-align:center;font-weight:700;font-size:0.9rem;border:1px solid rgba(165,180,252,0.2);">🎬 Stream in Ultra 4K with StreamFlix VIP • Ad-Free Premium Experience</div>',
+    htmlCode: '<div style="background:linear-gradient(135deg,#1e1b4b,#312e81);color:#a5b4fc;padding:12px 20px;border-radius:8px;text-align:center;font-weight:700;font-size:0.9rem;border:1px solid rgba(165,180,252,0.2);">🎬 Stream in Ultra 4K with Net Mirror BD VIP • Ad-Free Premium Experience</div>',
     active: true
   },
   {
@@ -303,13 +303,13 @@ export class SettingsService {
 
   private cacheSettings(settings: SiteSettings): void {
     try {
-      localStorage.setItem('streamflix_site_settings', JSON.stringify(settings));
+      localStorage.setItem('netmirrorbd_site_settings', JSON.stringify(settings));
     } catch { /* storage quota or restricted */ }
   }
 
   private loadCachedSettings(): SiteSettings {
     try {
-      const stored = localStorage.getItem('streamflix_site_settings');
+      const stored = localStorage.getItem('netmirrorbd_site_settings');
       if (stored) {
         return { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(stored) };
       }
@@ -319,13 +319,13 @@ export class SettingsService {
 
   private cacheAds(ads: AdConfig[]): void {
     try {
-      localStorage.setItem('streamflix_ads', JSON.stringify(ads));
+      localStorage.setItem('netmirrorbd_ads', JSON.stringify(ads));
     } catch { /* ignore */ }
   }
 
   private loadCachedAds(): AdConfig[] {
     try {
-      const stored = localStorage.getItem('streamflix_ads');
+      const stored = localStorage.getItem('netmirrorbd_ads');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;

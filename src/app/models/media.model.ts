@@ -1,4 +1,4 @@
-export type MediaType = 'movie' | 'tv';
+﻿export type MediaType = 'movie' | 'tv';
 
 // ─── TMDB Core Types ────────────────────────────────────────────────
 
@@ -370,13 +370,13 @@ export interface SiteSettings {
 }
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  siteName: 'Streamflixbd',
+  siteName: 'Net Mirror BDbd',
   logoUrl: '/logo.png',
   faviconUrl: '/favicon.ico',
   siteUrl: 'https://ott.akibhasan.online',
   contactEmail: 'roadyakib@gmail.com',
   footerText: 'MOVIES ANYTIME EVERYWHERE. The premier free streaming destination for full HD movies and television series.',
-  copyrightText: '© 2026 Streamflixbd. Developed by Md. Akib Hasan (roadyakib@gmail.com). All rights reserved.',
+  copyrightText: '© 2026 Net Mirror BDbd. Developed by Md. Akib Hasan (roadyakib@gmail.com). All rights reserved.',
   defaultLanguage: 'en',
   defaultCountry: 'US',
   timezone: 'UTC',
@@ -390,7 +390,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   customCss: '',
   tmdbApiKey: '',
   cacheDurationMinutes: 60,
-  globalSeoTitle: 'StreamFlix — Watch Movies & TV Series',
+  globalSeoTitle: 'Net Mirror BD — Watch Movies & TV Series',
   globalSeoDescription: 'Stream thousands of movies and TV series in HD. Free online streaming with multiple servers.',
   globalOgImage: '',
   robotsTxt: 'User-agent: *\nAllow: /',

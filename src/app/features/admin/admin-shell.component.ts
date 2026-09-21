@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -75,7 +75,7 @@ const ICONS: Record<string, string> = {
         <!-- Sidebar Brand Header -->
         <div class="sidebar-brand" [class.is-collapsed]="collapsed">
           <div class="brand-row" [title]="siteName + ' Admin'">
-            <img src="/logo-icon.png" alt="Streamflixbd" class="admin-brand-icon" />
+            <img src="/logo-icon.png" alt="Net Mirror BDbd" class="admin-brand-icon" />
             <div class="brand-words" *ngIf="!collapsed">
               <span class="bw-name"><span class="bw-white">{{ brandFirst }}</span><span class="bw-red">{{ brandRest }}</span></span>
               <span class="bw-sub">Admin Control</span>
@@ -141,7 +141,7 @@ const ICONS: Record<string, string> = {
       <aside class="mob-side-drawer" [class.open]="mobileSidebarOpen">
         <div class="mob-sd-hdr">
           <div class="brand-row">
-            <img src="/logo-icon.png" alt="Streamflixbd" class="admin-brand-icon" />
+            <img src="/logo-icon.png" alt="Net Mirror BDbd" class="admin-brand-icon" />
             <div class="brand-words">
               <span class="bw-name"><span class="bw-white">{{ brandFirst }}</span><span class="bw-red">{{ brandRest }}</span></span>
               <span class="bw-sub">Admin Navigation</span>
@@ -208,7 +208,7 @@ const ICONS: Record<string, string> = {
 
             <!-- Brand Logo for mobile topbar -->
             <div class="tb-mob-brand">
-              <img src="/logo-icon.png" alt="Streamflixbd" class="tb-brand-icon-img" />
+              <img src="/logo-icon.png" alt="Net Mirror BDbd" class="tb-brand-icon-img" />
               <span class="tb-brand-text"><span class="bw-white">{{ brandFirst }}</span><span class="bw-red">{{ brandRest }}</span></span>
             </div>
 
@@ -300,7 +300,7 @@ const ICONS: Record<string, string> = {
         <!-- Drawer Header -->
         <div class="drw-hdr">
           <div class="drw-brand">
-            <img src="/logo-icon.png" alt="Streamflixbd" class="admin-brand-icon sm" />
+            <img src="/logo-icon.png" alt="Net Mirror BDbd" class="admin-brand-icon sm" />
             <div>
               <div class="drw-title">{{ siteName }} Apps</div>
               <div class="drw-sub">Control Center &amp; Management</div>
@@ -936,7 +936,7 @@ export class AdminShellComponent implements OnInit, OnDestroy {
   appDrawerOpen = false;
 
   user$ = this.auth.currentUser$;
-  siteName = 'StreamFlix';
+  siteName = 'Net Mirror BD';
   brandFirst = 'Stream';
   brandRest = 'Flix';
   currentSection = 'Dashboard';
@@ -982,10 +982,10 @@ export class AdminShellComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.collapsed = localStorage.getItem('admin_sidebar_collapsed') === 'true';
     this.sub = this.settingsService.settings$.subscribe(s => {
-      const name = s.siteName || 'Streamflixbd';
+      const name = s.siteName || 'Net Mirror BDbd';
       this.siteName = name;
-      if (name.toLowerCase().startsWith('streamflix')) {
-        this.brandFirst = 'Streamflix';
+      if (name.toLowerCase().startsWith('Net Mirror BD')) {
+        this.brandFirst = 'Net Mirror BD';
         this.brandRest = name.slice(10) || 'bd';
       } else if (name.toLowerCase().startsWith('stream')) {
         this.brandFirst = 'Stream';

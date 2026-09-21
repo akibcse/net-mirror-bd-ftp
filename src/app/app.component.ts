@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+﻿import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
@@ -39,8 +39,8 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
     <header class="app-nav" *ngIf="!isAdminRoute()">
       <div class="nav-container">
         <div class="nav-left">
-          <a routerLink="/" class="brand-logo" *ngIf="settings$ | async as s" title="Streamflixbd">
-            <img src="/logo-icon.png" alt="Streamflixbd Logo" class="brand-logo-img" />
+          <a routerLink="/" class="brand-logo" *ngIf="settings$ | async as s" title="Net Mirror BD">
+            <img src="/logo-icon.png" alt="Net Mirror BD Logo" class="brand-logo-img" />
             <span class="brand-text-wrap">
               <span class="brand-text-white">{{ getBrandFirst(s.siteName) }}</span><span class="brand-text-red">{{ getBrandRest(s.siteName) }}</span>
             </span>
@@ -146,8 +146,8 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
     <footer class="app-footer" *ngIf="!isAdminRoute() && (!(settings$ | async)?.maintenanceMode || (isAdmin$ | async))">
       <div class="footer-container">
         <div class="footer-brand-col" *ngIf="settings$ | async as s">
-          <a routerLink="/" class="footer-logo" title="Streamflixbd">
-            <img src="/logo-icon.png" alt="Streamflixbd Logo" class="footer-logo-img" />
+          <a routerLink="/" class="footer-logo" title="Net Mirror BD">
+            <img src="/logo-icon.png" alt="Net Mirror BD Logo" class="footer-logo-img" />
             <span class="brand-text-wrap">
               <span class="brand-text-white">{{ getBrandFirst(s.siteName) }}</span><span class="brand-text-red">{{ getBrandRest(s.siteName) }}</span>
             </span>
@@ -194,7 +194,7 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
           Designed & Developed with ❤️ by <strong class="author-name">Md. Akib Hasan</strong>
           • Contact: <a href="mailto:roadyakib@gmail.com" class="author-email-link">roadyakib&#64;gmail.com</a>
         </p>
-        <p class="copyright-line">© 2026 {{ s.siteName || 'StreamFlixBD' }}. All rights reserved.</p>
+        <p class="copyright-line">© 2026 {{ s.siteName || 'Net Mirror BD' }}. All rights reserved.</p>
       </div>
     </footer>
 
@@ -943,14 +943,14 @@ export class AppComponent implements OnInit {
   }
 
   getBrandFirst(siteName?: string): string {
-    const name = siteName || 'StreamFlix';
+    const name = siteName || 'Net Mirror BD';
     if (name.toLowerCase().startsWith('stream')) return 'Stream';
     const half = Math.ceil(name.length / 2);
     return name.slice(0, half);
   }
 
   getBrandRest(siteName?: string): string {
-    const name = siteName || 'StreamFlix';
+    const name = siteName || 'Net Mirror BD';
     if (name.toLowerCase().startsWith('stream')) return name.slice(6); // everything after 'Stream'
     const half = Math.ceil(name.length / 2);
     return name.slice(half);

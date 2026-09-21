@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+﻿import { Injectable, inject } from '@angular/core';
 import { ref, set, remove, get, onValue, off, push, Unsubscribe } from 'firebase/database';
 import { BehaviorSubject, Observable, firstValueFrom, filter, timeout } from 'rxjs';
 import { FirebaseService } from './firebase.service';
@@ -120,9 +120,9 @@ export class UserActivityService {
     this.cleanupListeners();
 
     // 1. Instantly display this specific account's cached lists
-    const cachedWl = this.getLocalList(`streamflix_${uid}_watchlist`);
-    const cachedFav = this.getLocalList(`streamflix_${uid}_favorites`);
-    const cachedHist = this.getLocalList(`streamflix_${uid}_history`);
+    const cachedWl = this.getLocalList(`netmirrorbd_${uid}_watchlist`);
+    const cachedFav = this.getLocalList(`netmirrorbd_${uid}_favorites`);
+    const cachedHist = this.getLocalList(`netmirrorbd_${uid}_history`);
 
     this.watchlistSubject.next(cachedWl);
     this.favoritesSubject.next(cachedFav);
@@ -137,7 +137,7 @@ export class UserActivityService {
       const remoteList: WatchlistItem[] = Object.values(data).map(normalizeWatchlistItem);
       remoteList.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
       this.watchlistSubject.next(remoteList);
-      this.saveLocalList(`streamflix_${uid}_watchlist`, remoteList);
+      this.saveLocalList(`netmirrorbd_${uid}_watchlist`, remoteList);
     }, error => {
       console.warn('Watchlist listener error:', error);
     });
@@ -150,7 +150,7 @@ export class UserActivityService {
       const remoteList: WatchlistItem[] = Object.values(data).map(normalizeWatchlistItem);
       remoteList.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
       this.favoritesSubject.next(remoteList);
-      this.saveLocalList(`streamflix_${uid}_favorites`, remoteList);
+      this.saveLocalList(`netmirrorbd_${uid}_favorites`, remoteList);
     }, error => {
       console.warn('Favorites listener error:', error);
     });
@@ -163,7 +163,7 @@ export class UserActivityService {
       const remoteList: WatchHistoryItem[] = Object.values(data).map(normalizeHistoryItem);
       remoteList.sort((a, b) => (b.watchedAt || 0) - (a.watchedAt || 0));
       this.historySubject.next(remoteList);
-      this.saveLocalList(`streamflix_${uid}_history`, remoteList);
+      this.saveLocalList(`netmirrorbd_${uid}_history`, remoteList);
     }, error => {
       console.warn('History listener error:', error);
     });
@@ -236,7 +236,7 @@ export class UserActivityService {
 
     // 2. Account-specific Database Sync
     if (uid) {
-      this.saveLocalList(`streamflix_${uid}_watchlist`, nextList);
+      this.saveLocalList(`netmirrorbd_${uid}_watchlist`, nextList);
       const wlNode = ref(this.firebase.db, `user_activity/${uid}/watchlist/${clean.id}`);
       try {
         if (exists) {
@@ -281,7 +281,7 @@ export class UserActivityService {
 
     // 2. Account-specific Database Sync
     if (uid) {
-      this.saveLocalList(`streamflix_${uid}_favorites`, nextList);
+      this.saveLocalList(`netmirrorbd_${uid}_favorites`, nextList);
       const favNode = ref(this.firebase.db, `user_activity/${uid}/favorites/${clean.id}`);
       try {
         if (exists) {
@@ -310,7 +310,7 @@ export class UserActivityService {
 
     // Account-specific Database Sync
     if (uid) {
-      this.saveLocalList(`streamflix_${uid}_history`, nextList);
+      this.saveLocalList(`netmirrorbd_${uid}_history`, nextList);
       const histNode = ref(this.firebase.db, `user_activity/${uid}/history/${clean.id}`);
       try {
         await set(histNode, sanitizeForFirebase(clean));
@@ -327,7 +327,7 @@ export class UserActivityService {
     this.historySubject.next(nextList);
 
     if (uid) {
-      this.saveLocalList(`streamflix_${uid}_history`, nextList);
+      this.saveLocalList(`netmirrorbd_${uid}_history`, nextList);
       const histNode = ref(this.firebase.db, `user_activity/${uid}/history/${numId}`);
       try {
         await remove(histNode);

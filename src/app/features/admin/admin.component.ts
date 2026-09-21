@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+﻿import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -65,7 +65,7 @@ export class AdminComponent {
   private readonly firebase = inject(FirebaseService);
   private readonly settingsService = inject(SettingsService);
 
-  readonly siteName$ = this.settingsService.settings$.pipe(map(s => s.siteName || 'StreamFlix'));
+  readonly siteName$ = this.settingsService.settings$.pipe(map(s => s.siteName || 'Net Mirror BD'));
 
   readonly activeTab = signal<'logs' | 'users' | 'servers' | 'reports' | 'system'>('logs');
   readonly searchQuery = signal('');

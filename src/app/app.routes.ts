@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+﻿import { Routes } from '@angular/router';
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
 
@@ -7,37 +7,37 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
-    title: 'StreamFlix — Watch Movies & TV Series Free'
+    title: 'Net Mirror BD — Watch Movies & TV Series Free'
   },
   {
     path: 'movies',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Browse Movies'
+    title: 'Net Mirror BD — Browse Movies'
   },
   {
     path: 'tv',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Browse TV Series'
+    title: 'Net Mirror BD — Browse TV Series'
   },
   {
     path: 'trending',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Trending'
+    title: 'Net Mirror BD — Trending'
   },
   {
     path: 'popular',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Popular'
+    title: 'Net Mirror BD — Popular'
   },
   {
     path: 'top-rated',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Top Rated'
+    title: 'Net Mirror BD — Top Rated'
   },
   {
     path: 'upcoming',
     loadComponent: () => import('./features/browse/media-browse.component').then(m => m.MediaBrowseComponent),
-    title: 'StreamFlix — Upcoming Movies'
+    title: 'Net Mirror BD — Upcoming Movies'
   },
 
   // ── Genre / Person ───────────────────────────────────────────────
@@ -62,19 +62,19 @@ export const routes: Routes = [
   {
     path: 'movie/:id/watch',
     loadComponent: () => import('./features/movie-player/movie-player.component').then(m => m.MoviePlayerComponent),
-    title: 'StreamFlix — Watch Movie'
+    title: 'Net Mirror BD — Watch Movie'
   },
   {
     path: 'tv/:id/watch',
     loadComponent: () => import('./features/movie-player/movie-player.component').then(m => m.MoviePlayerComponent),
-    title: 'StreamFlix — Watch TV Series'
+    title: 'Net Mirror BD — Watch TV Series'
   },
 
   // ── Search ───────────────────────────────────────────────────────
   {
     path: 'search',
     loadComponent: () => import('./features/search/search.component').then(m => m.SearchComponent),
-    title: 'StreamFlix — Search'
+    title: 'Net Mirror BD — Search'
   },
 
   // ── User (protected) ─────────────────────────────────────────────
@@ -82,36 +82,36 @@ export const routes: Routes = [
     path: 'my-list',
     loadComponent: () => import('./features/my-list/my-list.component').then(m => m.MyListComponent),
     canActivate: [authGuard],
-    title: 'StreamFlix — My Library'
+    title: 'Net Mirror BD — My Library'
   },
   {
     path: 'profile',
     loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard],
-    title: 'StreamFlix — My Profile'
+    title: 'Net Mirror BD — My Profile'
   },
   {
     path: 'notifications',
     loadComponent: () => import('./features/notifications/notifications.component').then(m => m.NotificationsComponent),
     canActivate: [authGuard],
-    title: 'StreamFlix — Notifications'
+    title: 'Net Mirror BD — Notifications'
   },
 
   // ── Auth ─────────────────────────────────────────────────────────
   {
     path: 'login',
     loadComponent: () => import('./features/auth/login.component').then(m => m.LoginComponent),
-    title: 'StreamFlix — Sign In'
+    title: 'Net Mirror BD — Sign In'
   },
   {
     path: 'register',
     loadComponent: () => import('./features/auth/register.component').then(m => m.RegisterComponent),
-    title: 'StreamFlix — Create Account'
+    title: 'Net Mirror BD — Create Account'
   },
   {
     path: 'forgot-password',
     loadComponent: () => import('./features/auth/forgot-password.component').then(m => m.ForgotPasswordComponent),
-    title: 'StreamFlix — Reset Password'
+    title: 'Net Mirror BD — Reset Password'
   },
 
   // ── Admin ────────────────────────────────────────────────────────
@@ -214,7 +214,7 @@ export const routes: Routes = [
   {
     path: 'not-found',
     loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
-    title: 'StreamFlix — Page Not Found'
+    title: 'Net Mirror BD — Page Not Found'
   },
   { path: '**', redirectTo: 'not-found' }
 ];

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component, OnInit, OnDestroy, inject, ChangeDetectorRef,
   ElementRef, ViewChild, AfterViewInit, HostListener
 } from '@angular/core';
@@ -74,7 +74,7 @@ const TOTAL_COUNTDOWN_SECONDS = 30;
           <div class="smartlink-banner">
             <div class="sl-inner">
               <div class="sl-badge">⚡ SPONSOR REWARD OFFER</div>
-              <p class="sl-text">Support StreamFlix — Check out top premium streaming offers &amp; partner deals</p>
+              <p class="sl-text">Support Net Mirror BD — Check out top premium streaming offers &amp; partner deals</p>
               <a
                 href="https://www.profitableratecpmnetwork.com/wi20vj0k7n?key=08224ba61f33a164c53d1f93fc13d95b"
                 target="_blank"

@@ -1,4 +1,4 @@
-import { Injectable, inject, signal, NgZone } from '@angular/core';
+﻿import { Injectable, inject, signal, NgZone } from '@angular/core';
 import { getDatabase, ref, set, get, push, remove, update } from 'firebase/database';
 import { FirebaseService } from './firebase.service';
 import { MovieService } from './movie.service';
@@ -564,7 +564,7 @@ export class AdminMediaService {
 
       let geo: any = null;
       try {
-        const stored = sessionStorage.getItem('streamflix_cached_geo_v2');
+        const stored = sessionStorage.getItem('netmirrorbd_cached_geo_v2');
         if (stored) geo = JSON.parse(stored);
       } catch { /* ignore */ }
 

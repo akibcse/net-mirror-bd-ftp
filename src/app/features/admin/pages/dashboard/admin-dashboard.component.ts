@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -25,7 +25,7 @@ import {
       <div class="welcome-banner">
         <div>
           <h1>Welcome back, Admin 👋</h1>
-          <p>Here is what's happening on StreamFlix today.</p>
+          <p>Here is what's happening on Net Mirror BD today.</p>
         </div>
         <div class="quick-buttons">
           <a routerLink="/admin/analytics" class="btn-quick primary">

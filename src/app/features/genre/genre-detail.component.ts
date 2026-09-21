@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, inject, signal, ViewChild, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, AfterViewChecked, inject, signal, ViewChild, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
@@ -446,7 +446,7 @@ export class GenreDetailComponent implements OnInit, OnDestroy, AfterViewChecked
 
       this.seoService.setMediaDetailMeta(
         `${name} ${type === 'movie' ? 'Movies' : 'TV Series'} — Watch Online Free`,
-        `Watch the best ${name} ${type === 'movie' ? 'movies' : 'TV series'} in HD with multiple servers on StreamFlix.`
+        `Watch the best ${name} ${type === 'movie' ? 'movies' : 'TV series'} in HD with multiple servers on Net Mirror BD.`
       );
 
       this.fetchTitles();

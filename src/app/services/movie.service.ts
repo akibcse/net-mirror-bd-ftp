@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+﻿import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map, shareReplay } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -274,7 +274,7 @@ export class MovieService {
   getBackdropUrl(path: string | null, size: 'w300' | 'w780' | 'w1280' | 'original' = 'original'): string {
     return path
       ? `${this.imageBaseUrl}/${size}${path}`
-      : 'https://placehold.co/1280x720/151a24/ffffff?text=StreamFlix';
+      : 'https://placehold.co/1280x720/151a24/ffffff?text=Net Mirror BD';
   }
 
   getProfileUrl(path: string | null): string {

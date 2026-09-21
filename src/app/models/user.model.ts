@@ -1,6 +1,7 @@
 export interface AppUser {
   uid: string;
   email: string | null;
+  phoneNumber?: string | null;
   displayName: string | null;
   photoURL: string | null;
   role: 'admin' | 'user';

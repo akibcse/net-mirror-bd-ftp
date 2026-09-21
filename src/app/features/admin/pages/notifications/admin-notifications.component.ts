@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+﻿import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../../../services/notification.service';
@@ -415,7 +415,7 @@ export class AdminNotificationsComponent implements OnInit {
     this.pushPermission = perm;
     if (perm === 'granted') {
       this.successMsg = '🔔 Browser push notifications enabled!';
-      await this.triggerBrowserNotification('StreamFlix Admin', {
+      await this.triggerBrowserNotification('Net Mirror BD Admin', {
         body: 'Push notifications are now enabled. You will receive live alerts.',
         icon: '/logo-icon.png'
       });
@@ -428,8 +428,8 @@ export class AdminNotificationsComponent implements OnInit {
 
   async testPushNotification(): Promise<void> {
     if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
-    await this.triggerBrowserNotification('StreamFlix Test Notification 🎬', {
-      body: 'This is a test push notification from the StreamFlix Admin Panel.',
+    await this.triggerBrowserNotification('Net Mirror BD Test Notification 🎬', {
+      body: 'This is a test push notification from the Net Mirror BD Admin Panel.',
       icon: '/logo-icon.png',
       tag: 'test-push'
     });

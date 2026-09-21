@@ -1,7 +1,27 @@
 <div class="auth-card">
   <div class="auth-header">
     <h1 class="auth-title">Welcome Back</h1>
-    <p class="auth-subtitle">Sign in to your StreamFlix account</p>
+    <p class="auth-subtitle">Sign in to your Net Mirror BD account</p>
+  </div>
+
+  <!-- Sign In Method Tabs -->
+  <div class="auth-tabs">
+    <button
+      type="button"
+      class="auth-tab"
+      [class.active]="selectedTab() === 'email'"
+      (click)="setTab('email')"
+    >
+      ✉️ Email & Password
+    </button>
+    <button
+      type="button"
+      class="auth-tab"
+      [class.active]="selectedTab() === 'phone'"
+      (click)="setTab('phone')"
+    >
+      📱 Phone (SMS OTP)
+    </button>
   </div>
 
   <div class="alert alert-warning" *ngIf="accessDeniedNotice()">
@@ -12,7 +32,17 @@
     {{ errorMessage() }}
   </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+  <div class="alert alert-warning" *ngIf="successMessage()" style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #86efac;">
+    ✅ {{ successMessage() }}
+  </div>
+
+  <!-- EMAIL & PASSWORD TAB -->
+  <form
+    *ngIf="selectedTab() === 'email'"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="auth-form"
+  >
     <div class="form-group">
       <label class="form-label" for="email">Email Address</label>
       <input
@@ -56,10 +86,105 @@
     </div>
 
     <button type="submit" class="btn-primary" [disabled]="loading()">
-      <span *ngIf="!loading()">Sign In</span>
+      <span *ngIf="!loading()">Sign In with Email</span>
       <span *ngIf="loading()">Signing in...</span>
     </button>
   </form>
+
+  <!-- PHONE AUTHENTICATION TAB -->
+  <div *ngIf="selectedTab() === 'phone'" class="auth-form">
+    <!-- Step 1: Phone Number Input -->
+    <div *ngIf="phoneStep() === 'input'">
+      <div class="form-group">
+        <label class="form-label" for="phoneInput">Mobile Phone Number</label>
+        <div class="phone-input-row">
+          <select
+            class="phone-prefix-select"
+            [value]="phoneCountryCode()"
+            (change)="phoneCountryCode.set($any($event.target).value)"
+          >
+            <option value="+880">🇧🇩 +880 (BD)</option>
+            <option value="+1">🇺🇸 +1 (US/CA)</option>
+            <option value="+44">🇬🇧 +44 (UK)</option>
+            <option value="+91">🇮🇳 +91 (IN)</option>
+            <option value="+971">🇦🇪 +971 (UAE)</option>
+            <option value="+966">🇸🇦 +966 (KSA)</option>
+            <option value="+65">🇸🇬 +65 (SG)</option>
+            <option value="+60">🇲🇾 +60 (MY)</option>
+            <option value="+61">🇦🇺 +61 (AU)</option>
+          </select>
+          <input
+            id="phoneInput"
+            type="tel"
+            class="form-input phone-input-flex"
+            [value]="rawPhoneNumber()"
+            (input)="rawPhoneNumber.set($any($event.target).value)"
+            placeholder="1712345678"
+            autocomplete="tel"
+          />
+        </div>
+        <span class="phone-hint">Format: 01XXXXXXXXX or without leading zero. We will send a 6-digit SMS code.</span>
+      </div>
+
+      <!-- Container for Firebase reCAPTCHA -->
+      <div id="recaptcha-container"></div>
+
+      <button
+        type="button"
+        class="btn-primary"
+        style="margin-top: 1rem;"
+        (click)="onSendOtp()"
+        [disabled]="loading() || !rawPhoneNumber()"
+      >
+        <span *ngIf="!loading()">📲 Send SMS OTP</span>
+        <span *ngIf="loading()">Sending verification code...</span>
+      </button>
+    </div>
+
+    <!-- Step 2: Verification Code Input -->
+    <div *ngIf="phoneStep() === 'verify'" class="otp-box">
+      <p class="otp-prompt">
+        We sent an SMS with a 6-digit code to<br />
+        <span class="otp-target-number">{{ fullPhoneNumber }}</span>
+      </p>
+
+      <div class="form-group">
+        <label class="form-label" for="otpInput">Enter 6-Digit SMS Code</label>
+        <input
+          id="otpInput"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="6"
+          class="form-input otp-input-field"
+          [value]="otpCode()"
+          (input)="otpCode.set($any($event.target).value)"
+          placeholder="••••••"
+          autocomplete="one-time-code"
+          autofocus
+        />
+      </div>
+
+      <button
+        type="button"
+        class="btn-primary"
+        (click)="onVerifyOtp()"
+        [disabled]="loading() || otpCode().length < 6"
+      >
+        <span *ngIf="!loading()">✅ Verify & Sign In</span>
+        <span *ngIf="loading()">Verifying code...</span>
+      </button>
+
+      <div class="otp-actions">
+        <button type="button" class="btn-inline-link" (click)="onResetPhone()">
+          ← Change phone number
+        </button>
+        <button type="button" class="btn-inline-link" (click)="onSendOtp()" [disabled]="loading()">
+          ↻ Resend SMS
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="divider">
     <span>Or continue with</span>
@@ -92,3 +217,4 @@
     <a routerLink="/register" class="auth-link">Create Account</a>
   </div>
 </div>
+

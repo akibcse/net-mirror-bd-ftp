@@ -20,13 +20,13 @@ export class SeoService {
   private readonly document = inject(DOCUMENT);
   private readonly settingsService = inject(SettingsService);
 
-  private siteName = 'StreamFlix';
-  private defaultTitle = 'StreamFlix — Watch Movies & TV Series Online Free in Full HD';
+  private siteName = 'Net Mirror BD';
+  private defaultTitle = 'Net Mirror BD — Watch Movies & TV Series Online Free in Full HD';
   private defaultDescription = 'Stream thousands of movies and TV series in HD for free. Multiple servers, subtitles, and more.';
   private defaultImage = 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1200&h=630&fit=crop';
   private defaultKeywords = 'movies, stream, free movies, watch online, tv series, cinema, streaming hd';
-  private siteUrl = 'https://streamflix.vercel.app';
-  private twitterHandle = '@streamflix';
+  private siteUrl = 'https://netmirrorbd.vercel.app';
+  private twitterHandle = '@netmirrorbd';
 
   constructor() {
     this.settingsService.settings$.subscribe(settings => {
@@ -50,7 +50,7 @@ export class SeoService {
 
   applyGlobalTags(): void {
     const currentTitle = this.titleService.getTitle();
-    if (!currentTitle || currentTitle.includes('StreamFlix') || currentTitle.includes('movie-streaming-app')) {
+    if (!currentTitle || currentTitle.includes('Net Mirror BD') || currentTitle.includes('movie-streaming-app')) {
       this.titleService.setTitle(this.defaultTitle);
     }
     this.meta.updateTag({ name: 'description', content: this.defaultDescription });

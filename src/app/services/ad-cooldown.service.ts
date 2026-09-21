@@ -1,8 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+﻿import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-const COOLDOWN_KEY = 'streamflix_ad_cooldown_until';
-const LAST_VIEWED_KEY = 'streamflix_ad_last_viewed_at';
+const COOLDOWN_KEY = 'netmirrorbd_ad_cooldown_until';
+const LAST_VIEWED_KEY = 'netmirrorbd_ad_last_viewed_at';
 const DEFAULT_COOLDOWN_HOURS = 24;
 
 export interface CooldownInfo {

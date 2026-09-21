@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+﻿import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminMediaService } from '../../../../services/admin-media.service';
@@ -469,7 +469,7 @@ export class AdminLogsComponent implements OnInit {
       encodeURIComponent(JSON.stringify(this.filteredLogs, null, 2));
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute('href', dataStr);
-    dlAnchor.setAttribute('download', `streamflix-audit-trail-${Date.now()}.json`);
+    dlAnchor.setAttribute('download', `Net Mirror BD-audit-trail-${Date.now()}.json`);
     dlAnchor.click();
   }
 }

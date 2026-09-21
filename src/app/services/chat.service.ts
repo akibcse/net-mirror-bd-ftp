@@ -1,4 +1,4 @@
-import { Injectable, inject, NgZone } from '@angular/core';
+﻿import { Injectable, inject, NgZone } from '@angular/core';
 import {
   ref, push, set, update, get, onValue, off, query, orderByChild
 } from 'firebase/database';
@@ -7,7 +7,7 @@ import { FirebaseService } from './firebase.service';
 import { AppUser } from '../models/user.model';
 import { ChatMessage, ChatSession, ChatSessionMeta } from '../models/chat.model';
 
-const SESSION_KEY = 'streamflix_chat_session_id';
+const SESSION_KEY = 'netmirrorbd_chat_session_id';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component, OnInit, OnDestroy, inject, signal, computed
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -43,7 +43,7 @@ type ChatStep = 'closed' | 'guest-form' | 'open';
         <div class="cw-header-left">
           <div class="cw-avatar">🛡️</div>
           <div class="cw-hinfo">
-            <span class="cw-title">StreamFlix Support</span>
+            <span class="cw-title">Net Mirror BD Support</span>
             <span class="cw-status" [class.online]="adminOnline()">
               <span class="status-dot"></span>
               {{ adminOnline() ? 'Admin is online' : 'Leave a message' }}
@@ -631,7 +631,7 @@ export class LiveChatWidgetComponent implements OnInit, OnDestroy {
       if (this.chatStep() !== 'open' && newAdminMsgs.length > prevCount) {
         const latest = newAdminMsgs[newAdminMsgs.length - 1];
         this.chatService.fireBrowserNotification(
-          '💬 StreamFlix Support',
+          '💬 Net Mirror BD Support',
           latest.text,
           '/'
         );

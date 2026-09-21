@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp, FirebaseApp, getApps } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
+import { Firestore, getFirestore } from 'firebase/firestore';
 import { Database, getDatabase } from 'firebase/database';
 import { environment } from '../../environments/environment';
 
@@ -10,11 +11,24 @@ import { environment } from '../../environments/environment';
 export class FirebaseService {
   public readonly app: FirebaseApp;
   public readonly auth: Auth;
-  public readonly db: Database;
+  public readonly firestore: Firestore;
+  public readonly db!: Database;
 
   constructor() {
     this.app = getApps().length > 0 ? getApps()[0] : initializeApp(environment.firebase);
     this.auth = getAuth(this.app);
-    this.db = getDatabase(this.app);
+    this.firestore = getFirestore(this.app);
+    try {
+      const rtdbUrl = (environment.firebase as any).databaseURL || `https://${environment.firebase.projectId}-default-rtdb.firebaseio.com`;
+      this.db = getDatabase(this.app, rtdbUrl);
+    } catch {
+      // Graceful fallback if RTDB is not configured
+      try {
+        this.db = getDatabase(this.app);
+      } catch {
+        // Realtime DB uninitialized
+      }
+    }
   }
 }
+

@@ -1,4 +1,4 @@
-import { Injectable, inject, NgZone } from '@angular/core';
+﻿import { Injectable, inject, NgZone } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ref, push, onValue, off, remove } from 'firebase/database';
@@ -47,7 +47,7 @@ export interface DetailedDeviceData {
   userAgent: string;
 }
 
-const GEO_STORAGE_KEY = 'streamflix_cached_geo_v2';
+const GEO_STORAGE_KEY = 'netmirrorbd_cached_geo_v2';
 
 @Injectable({
   providedIn: 'root'
@@ -679,10 +679,10 @@ export class VisitorLogService {
   getVisitorId(): string {
     if (typeof window === 'undefined') return 'srv';
     try {
-      let vid = localStorage.getItem('streamflix_visitor_id');
+      let vid = localStorage.getItem('netmirrorbd_visitor_id');
       if (!vid) {
         vid = 'v_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now().toString(36);
-        localStorage.setItem('streamflix_visitor_id', vid);
+        localStorage.setItem('netmirrorbd_visitor_id', vid);
       }
       return vid;
     } catch {

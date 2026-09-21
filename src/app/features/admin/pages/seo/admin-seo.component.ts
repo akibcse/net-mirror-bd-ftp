@@ -166,7 +166,7 @@ interface SitemapStats {
 
           <div class="form-group">
             <label>Twitter / X Creator Handle</label>
-            <input type="text" [(ngModel)]="seo.twitterHandle" class="form-control" placeholder="@streamflix" />
+            <input type="text" [(ngModel)]="seo.twitterHandle" class="form-control" placeholder="@Net Mirror BD" />
           </div>
         </div>
       </div>
@@ -431,11 +431,11 @@ export class AdminSeoComponent implements OnInit, OnDestroy {
   sitemapStats?: SitemapStats;
 
   seo = {
-    defaultTitle: 'StreamFlix — Watch Movies & TV Series Online Free in Full HD',
+    defaultTitle: 'Net Mirror BD — Watch Movies & TV Series Online Free in Full HD',
     defaultDescription: 'Stream thousands of movies and TV shows for free in HD quality. No sign-up required, multiple fast servers, and subtitle support.',
     keywords: 'movies, stream, free movies, watch online, tv series, cinema, streaming hd',
     ogImage: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1200&h=630&fit=crop',
-    twitterHandle: '@streamflix',
+    twitterHandle: '@netmirrorbd',
     siteUrl: 'https://ott.akibhasan.online'
   };
 
