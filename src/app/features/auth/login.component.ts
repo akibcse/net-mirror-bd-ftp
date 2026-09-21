@@ -4,6 +4,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ConfirmationResult, RecaptchaVerifier } from 'firebase/auth';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -73,11 +74,26 @@ export class LoginComponent implements OnInit, OnDestroy {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       this.router.navigateByUrl(returnUrl);
     } catch (err: any) {
+      const code = err?.code || '';
+      // If admin email not found — auto-create their account on first login attempt
+      const isAdminEmail = (environment.adminEmails || []).map(e => e.toLowerCase()).includes((email || '').toLowerCase());
+      if ((code === 'auth/user-not-found' || code === 'auth/invalid-credential') && isAdminEmail) {
+        try {
+          await this.auth.register(email!, password!, 'Admin');
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+          return;
+        } catch (regErr: any) {
+          this.errorMessage.set(this.formatAuthError(regErr));
+          return;
+        }
+      }
       this.errorMessage.set(this.formatAuthError(err));
     } finally {
       this.loading.set(false);
     }
   }
+
 
   async onGoogleSignIn(): Promise<void> {
     this.loading.set(true);
