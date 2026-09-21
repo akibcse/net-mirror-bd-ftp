@@ -63,16 +63,33 @@ export class AuthService {
   public readonly isAdmin$: Observable<boolean> = this.currentUser$.pipe(
     map(user => {
       if (!user) return false;
-      const emailLower = user.email?.toLowerCase() || '';
-      const isConfiguredAdmin = environment.adminEmails?.map(e => e.toLowerCase()).includes(emailLower);
-      return user.role === 'admin' || !!isConfiguredAdmin;
+      return user.role === 'admin' || this.checkIsAdmin(user.email);
     }),
     distinctUntilChanged()
   );
 
   private recaptchaVerifier: RecaptchaVerifier | null = null;
+  private get safeDb() { return this.firebase.db; }
 
   constructor() {
+    // 1. Immediately hydrate auth state from localStorage cache for 0ms lag
+    try {
+      if (typeof window !== 'undefined') {
+        const cached = localStorage.getItem('netmirror_user_cache');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.uid) {
+            if (this.checkIsAdmin(parsed.email)) {
+              parsed.role = 'admin';
+            }
+            this.currentUserSubject.next(parsed);
+            this.loadingSubject.next(false);
+          }
+        }
+      }
+    } catch { /* ignore cache read error */ }
+
+    // 2. Listen to Firebase Auth state
     this.initAuthState();
   }
 
@@ -80,114 +97,121 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public checkIsAdmin(email?: string | null): boolean {
+    if (!email) return false;
+    const emailLower = email.trim().toLowerCase();
+    const adminEmails = (environment.adminEmails || []).map(e => e.trim().toLowerCase());
+    return adminEmails.includes(emailLower);
+  }
+
   private initAuthState(): void {
     onAuthStateChanged(this.firebase.auth, (fbUser: FirebaseUser | null) => {
-      this.zone.run(async () => {
+      this.zone.run(() => {
         if (!fbUser) {
           this.currentUserSubject.next(null);
           this.loadingSubject.next(false);
+          try {
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem('netmirror_user_cache');
+            }
+          } catch { /* ignore */ }
           return;
         }
 
+        const emailLower = fbUser.email?.trim().toLowerCase() || '';
+        const isAdminConfigured = this.checkIsAdmin(emailLower);
+        const role: 'admin' | 'user' = isAdminConfigured ? 'admin' : 'user';
+        const defaultDisplayName = fbUser.displayName
+          || (fbUser.phoneNumber ? `User ${fbUser.phoneNumber}` : (fbUser.email?.split('@')[0] || 'User'));
+
+        const existing = this.currentUserSubject.value;
+        const appUser: AppUser = {
+          uid: fbUser.uid,
+          email: fbUser.email || existing?.email || null,
+          phoneNumber: fbUser.phoneNumber || existing?.phoneNumber || null,
+          displayName: existing?.displayName || defaultDisplayName,
+          photoURL: fbUser.photoURL || existing?.photoURL || null,
+          role: (isAdminConfigured || existing?.role === 'admin') ? 'admin' : role,
+          createdAt: existing?.createdAt || Date.now(),
+          lastLoginAt: Date.now(),
+          ...this.getClientTelemetry()
+        };
+
+        // Emit immediately! Never block UI on remote network queries!
+        this.currentUserSubject.next(appUser);
+        this.loadingSubject.next(false);
         try {
-          const now = Date.now();
-          const emailLower = fbUser.email?.toLowerCase() || '';
-          const isAdminConfigured = environment.adminEmails?.map(e => e.toLowerCase()).includes(emailLower);
-          const telemetry = this.getClientTelemetry();
-
-          // 1. Try reading existing profile from Firestore
-          let existingData: any = null;
-          try {
-            const userDocRef = doc(this.firebase.firestore, 'users', fbUser.uid);
-            const fsSnap = await getDoc(userDocRef);
-            if (fsSnap.exists()) {
-              existingData = fsSnap.data();
-            }
-          } catch (fsErr) {
-            console.warn('Firestore user fetch notice (fallback checking RTDB):', fsErr);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('netmirror_user_cache', JSON.stringify(appUser));
           }
+        } catch { /* ignore */ }
 
-          // Fallback to RTDB if not found in Firestore
-          if (!existingData) {
-            try {
-              const rtdbRef = ref(this.firebase.db, `users/${fbUser.uid}`);
-              const rtdbSnap = await get(rtdbRef);
-              if (rtdbSnap.exists()) {
-                existingData = rtdbSnap.val();
-              }
-            } catch { /* ignore */ }
-          }
-
-          // For brand new users (no prior profile), check if they're the first ever
-          let isFirstUser = false;
-          if (!existingData) {
-            try {
-              const usersCol = collection(this.firebase.firestore, 'users');
-              const snap = await import('firebase/firestore').then(m =>
-                m.getDocs(m.query(usersCol, m.limit(1)))
-              );
-              isFirstUser = snap.empty || (snap.size === 1 && snap.docs[0].id === fbUser.uid);
-            } catch {
-              try {
-                const usersSnap = await get(ref(this.firebase.db, 'users'));
-                isFirstUser = !usersSnap.exists();
-              } catch { /* ignore */ }
-            }
-          }
-
-          const role: 'admin' | 'user' = (isAdminConfigured || existingData?.role === 'admin' || isFirstUser) ? 'admin' : 'user';
-          const defaultDisplayName = fbUser.displayName || existingData?.displayName || (fbUser.phoneNumber ? `User ${fbUser.phoneNumber}` : (fbUser.email?.split('@')[0] || 'User'));
-
-          const appUser: AppUser = {
-            uid: fbUser.uid,
-            email: fbUser.email || existingData?.email || null,
-            phoneNumber: fbUser.phoneNumber || existingData?.phoneNumber || null,
-            displayName: defaultDisplayName,
-            photoURL: fbUser.photoURL || existingData?.photoURL || null,
-            role,
-            createdAt: existingData?.createdAt || now,
-            lastLoginAt: now,
-            ...telemetry
-          };
-
-          const cleanUser = cleanUndefined(appUser);
-
-          // Save to Firestore
-          try {
-            const userDocRef = doc(this.firebase.firestore, 'users', fbUser.uid);
-            await setDoc(userDocRef, cleanUser, { merge: true });
-          } catch (fsErr) {
-            console.warn('Error syncing user profile to Firestore:', fsErr);
-          }
-
-          // Dual-sync to RTDB for backward compatibility
-          try {
-            const rtdbRef = ref(this.firebase.db, `users/${fbUser.uid}`);
-            await set(rtdbRef, cleanUser);
-          } catch { /* ignore */ }
-
-          this.currentUserSubject.next(appUser);
-        } catch (err) {
-          console.error('Error syncing user profile with database:', err);
-          const emailLower = fbUser.email?.toLowerCase() || '';
-          const isAdminConfigured = environment.adminEmails?.map(e => e.toLowerCase()).includes(emailLower);
-          const role: 'admin' | 'user' = isAdminConfigured ? 'admin' : 'user';
-
-          this.currentUserSubject.next({
-            uid: fbUser.uid,
-            email: fbUser.email,
-            phoneNumber: fbUser.phoneNumber || null,
-            displayName: fbUser.displayName || fbUser.phoneNumber || 'User',
-            photoURL: fbUser.photoURL,
-            role,
-            createdAt: Date.now(),
-            lastLoginAt: Date.now()
-          });
-        } finally {
-          this.loadingSubject.next(false);
-        }
+        // Background non-blocking profile sync
+        this.syncUserProfileInBackground(fbUser, appUser);
       });
     });
+  }
+
+  private async syncUserProfileInBackground(fbUser: FirebaseUser, baseUser: AppUser): Promise<void> {
+    try {
+      const timeout = <T>(p: Promise<T>, ms = 2500): Promise<T> =>
+        Promise.race([p, new Promise<T>((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))]);
+
+      let remoteData: any = null;
+
+      // 1. Try reading from RTDB (Realtime Database primary)
+      if (this.safeDb) {
+        try {
+          const rtdbSnap = await timeout(get(ref(this.safeDb, `users/${fbUser.uid}`)));
+          if (rtdbSnap && rtdbSnap.exists()) {
+            remoteData = rtdbSnap.val();
+          }
+        } catch { /* ignore */ }
+      }
+
+      // 2. Try Firestore fallback if not found in RTDB
+      if (!remoteData) {
+        try {
+          const userDocRef = doc(this.firebase.firestore, 'users', fbUser.uid);
+          const fsSnap = await timeout(getDoc(userDocRef));
+          if (fsSnap && fsSnap.exists()) {
+            remoteData = fsSnap.data();
+          }
+        } catch { /* ignore */ }
+      }
+
+      const isAdminConfigured = this.checkIsAdmin(fbUser.email);
+      const finalRole: 'admin' | 'user' = (isAdminConfigured || remoteData?.role === 'admin' || baseUser.role === 'admin') ? 'admin' : 'user';
+
+      const mergedUser: AppUser = {
+        ...baseUser,
+        ...(remoteData || {}),
+        role: finalRole,
+        lastLoginAt: Date.now()
+      };
+
+      const clean = cleanUndefined(mergedUser);
+
+      // Dual-sync to RTDB
+      if (this.safeDb) {
+        set(ref(this.safeDb, `users/${fbUser.uid}`), clean).catch(() => {});
+      }
+
+      // Dual-sync to Firestore
+      try {
+        const docRef = doc(this.firebase.firestore, 'users', fbUser.uid);
+        setDoc(docRef, clean, { merge: true }).catch(() => {});
+      } catch { /* ignore */ }
+
+      this.currentUserSubject.next(mergedUser);
+      try {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('netmirror_user_cache', JSON.stringify(mergedUser));
+        }
+      } catch { /* ignore */ }
+    } catch {
+      // Non-blocking sync error
+    }
   }
 
   private getClientTelemetry(): Partial<AppUser> {
@@ -230,39 +254,24 @@ export class AuthService {
   }
 
   async register(email: string, password: string, displayName: string): Promise<AppUser> {
-    const cred = await createUserWithEmailAndPassword(this.firebase.auth, email, password);
+    const cleanEmail = email.trim();
+    const cred = await createUserWithEmailAndPassword(this.firebase.auth, cleanEmail, password);
     if (displayName) {
-      await updateProfile(cred.user, { displayName });
-    }
-
-    const now = Date.now();
-    const isAdminConfigured = environment.adminEmails?.includes(email.toLowerCase());
-
-    // Check if this is the very first user — if so, make them admin
-    let isFirstUser = false;
-    try {
-      const usersCol = collection(this.firebase.firestore, 'users');
-      const snap = await import('firebase/firestore').then(m =>
-        m.getDocs(m.query(usersCol, m.limit(1)))
-      );
-      // Only count other users (exclude this newly created uid)
-      isFirstUser = snap.empty || (snap.size === 1 && snap.docs[0].id === cred.user.uid);
-    } catch {
-      // Fallback: check RTDB
       try {
-        const usersSnap = await get(ref(this.firebase.db, 'users'));
-        isFirstUser = !usersSnap.exists();
+        await updateProfile(cred.user, { displayName });
       } catch { /* ignore */ }
     }
 
-    const role: 'admin' | 'user' = (isAdminConfigured || isFirstUser) ? 'admin' : 'user';
+    const now = Date.now();
+    const isAdminConfigured = this.checkIsAdmin(cleanEmail);
+    const role: 'admin' | 'user' = isAdminConfigured ? 'admin' : 'user';
     const telemetry = this.getClientTelemetry();
 
     const user: AppUser = {
       uid: cred.user.uid,
       email: cred.user.email,
       phoneNumber: cred.user.phoneNumber || null,
-      displayName: displayName || cred.user.email?.split('@')[0] || 'User',
+      displayName: displayName || cleanEmail.split('@')[0] || 'User',
       photoURL: null,
       role,
       createdAt: now,
@@ -270,32 +279,85 @@ export class AuthService {
       ...telemetry
     };
 
-    const cleanUser = cleanUndefined(user);
-
-    // Save to Firestore
+    // Instant local state update
+    this.currentUserSubject.next(user);
+    this.loadingSubject.next(false);
     try {
-      const docRef = doc(this.firebase.firestore, 'users', user.uid);
-      await setDoc(docRef, cleanUser);
-    } catch (fsErr) {
-      console.warn('Firestore register write notice:', fsErr);
-    }
-
-    // Save to RTDB
-    try {
-      await set(ref(this.firebase.db, `users/${user.uid}`), cleanUser);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('netmirror_user_cache', JSON.stringify(user));
+      }
     } catch { /* ignore */ }
 
-    this.currentUserSubject.next(user);
+    // Save to RTDB and Firestore
+    const cleanUser = cleanUndefined(user);
+    if (this.safeDb) {
+      set(ref(this.safeDb, `users/${user.uid}`), cleanUser).catch(() => {});
+    }
+    try {
+      const docRef = doc(this.firebase.firestore, 'users', user.uid);
+      setDoc(docRef, cleanUser).catch(() => {});
+    } catch { /* ignore */ }
+
     return user;
   }
 
-  async login(email: string, password: string): Promise<void> {
-    await signInWithEmailAndPassword(this.firebase.auth, email, password);
+  async login(email: string, password: string): Promise<AppUser> {
+    const cleanEmail = email.trim();
+    const cred = await signInWithEmailAndPassword(this.firebase.auth, cleanEmail, password);
+    const fbUser = cred.user;
+    const isAdmin = this.checkIsAdmin(fbUser.email || cleanEmail);
+    const appUser: AppUser = {
+      uid: fbUser.uid,
+      email: fbUser.email || cleanEmail,
+      phoneNumber: fbUser.phoneNumber || null,
+      displayName: fbUser.displayName || cleanEmail.split('@')[0] || 'User',
+      photoURL: fbUser.photoURL || null,
+      role: isAdmin ? 'admin' : 'user',
+      createdAt: Date.now(),
+      lastLoginAt: Date.now(),
+      ...this.getClientTelemetry()
+    };
+
+    // Instant emission
+    this.currentUserSubject.next(appUser);
+    this.loadingSubject.next(false);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('netmirror_user_cache', JSON.stringify(appUser));
+      }
+    } catch { /* ignore */ }
+
+    this.syncUserProfileInBackground(fbUser, appUser);
+    return appUser;
   }
 
-  async loginWithGoogle(): Promise<void> {
+  async loginWithGoogle(): Promise<AppUser> {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(this.firebase.auth, provider);
+    const cred = await signInWithPopup(this.firebase.auth, provider);
+    const fbUser = cred.user;
+    const isAdmin = this.checkIsAdmin(fbUser.email);
+    const appUser: AppUser = {
+      uid: fbUser.uid,
+      email: fbUser.email || null,
+      phoneNumber: fbUser.phoneNumber || null,
+      displayName: fbUser.displayName || fbUser.email?.split('@')[0] || 'User',
+      photoURL: fbUser.photoURL || null,
+      role: isAdmin ? 'admin' : 'user',
+      createdAt: Date.now(),
+      lastLoginAt: Date.now(),
+      ...this.getClientTelemetry()
+    };
+
+    this.currentUserSubject.next(appUser);
+    this.loadingSubject.next(false);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('netmirror_user_cache', JSON.stringify(appUser));
+      }
+    } catch { /* ignore */ }
+
+    this.syncUserProfileInBackground(fbUser, appUser);
+    return appUser;
   }
 
   /**
@@ -344,14 +406,45 @@ export class AuthService {
   /**
    * Confirm phone OTP verification code
    */
-  async verifyPhoneOtp(confirmationResult: ConfirmationResult, verificationCode: string): Promise<void> {
-    await confirmationResult.confirm(verificationCode);
+  async verifyPhoneOtp(confirmationResult: ConfirmationResult, verificationCode: string): Promise<AppUser> {
+    const cred = await confirmationResult.confirm(verificationCode);
+    const fbUser = cred.user;
+    const isAdmin = this.checkIsAdmin(fbUser.email);
+    const appUser: AppUser = {
+      uid: fbUser.uid,
+      email: fbUser.email || null,
+      phoneNumber: fbUser.phoneNumber || null,
+      displayName: fbUser.displayName || fbUser.phoneNumber || 'User',
+      photoURL: fbUser.photoURL || null,
+      role: isAdmin ? 'admin' : 'user',
+      createdAt: Date.now(),
+      lastLoginAt: Date.now(),
+      ...this.getClientTelemetry()
+    };
+
+    this.currentUserSubject.next(appUser);
+    this.loadingSubject.next(false);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('netmirror_user_cache', JSON.stringify(appUser));
+      }
+    } catch { /* ignore */ }
+
+    this.syncUserProfileInBackground(fbUser, appUser);
+    return appUser;
   }
 
   async logout(): Promise<void> {
     this.clearRecaptcha();
-    await signOut(this.firebase.auth);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('netmirror_user_cache');
+      }
+    } catch { /* ignore */ }
     this.currentUserSubject.next(null);
+    try {
+      await signOut(this.firebase.auth);
+    } catch { /* ignore */ }
   }
 
   getAllUsers(): Observable<AppUser[]> {
@@ -429,10 +522,12 @@ export class AuthService {
     } catch (e) {
       console.warn('Firestore role update error:', e);
     }
-    try {
-      const userRef = ref(this.firebase.db, `users/${uid}`);
-      await update(userRef, { role });
-    } catch { /* ignore */ }
+    if (this.safeDb) {
+      try {
+        const userRef = ref(this.safeDb, `users/${uid}`);
+        await update(userRef, { role });
+      } catch { /* ignore */ }
+    }
 
     if (this.currentUserSubject.value?.uid === uid) {
       this.currentUserSubject.next({
@@ -450,10 +545,12 @@ export class AuthService {
     } catch (e) {
       console.warn('Firestore updateUserData error:', e);
     }
-    try {
-      const userRef = ref(this.firebase.db, `users/${uid}`);
-      await update(userRef, clean);
-    } catch { /* ignore */ }
+    if (this.safeDb) {
+      try {
+        const userRef = ref(this.safeDb, `users/${uid}`);
+        await update(userRef, clean);
+      } catch { /* ignore */ }
+    }
 
     if (this.currentUserSubject.value?.uid === uid) {
       this.currentUserSubject.next({
@@ -470,10 +567,12 @@ export class AuthService {
     } catch (e) {
       console.warn('Firestore deleteUser error:', e);
     }
-    try {
-      const userRef = ref(this.firebase.db, `users/${uid}`);
-      await remove(userRef);
-    } catch { /* ignore */ }
+    if (this.safeDb) {
+      try {
+        const userRef = ref(this.safeDb, `users/${uid}`);
+        await remove(userRef);
+      } catch { /* ignore */ }
+    }
   }
 
   async resetPassword(email: string): Promise<void> {
@@ -491,10 +590,12 @@ export class AuthService {
     } catch (e) {
       console.warn('Firestore profile update error:', e);
     }
-    try {
-      const userRef = ref(this.firebase.db, `users/${user.uid}`);
-      await update(userRef, clean);
-    } catch { /* ignore */ }
+    if (this.safeDb) {
+      try {
+        const userRef = ref(this.safeDb, `users/${user.uid}`);
+        await update(userRef, clean);
+      } catch { /* ignore */ }
+    }
 
     if (this.currentUserSubject.value) {
       this.currentUserSubject.next({

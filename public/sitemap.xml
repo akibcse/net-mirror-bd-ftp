@@ -260,26 +260,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1101383</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg</image:loc>
-      <image:title>The End of Oak Street</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/1101383/watch</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg</image:loc>
-      <image:title>Watch The End of Oak Street Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://streamflixbd.vercel.app/movie/1423191</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -297,6 +277,26 @@
     <image:image>
       <image:loc>https://image.tmdb.org/t/p/w780/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg</image:loc>
       <image:title>Watch Resident Evil Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/1101383</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg</image:loc>
+      <image:title>The End of Oak Street</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/1101383/watch</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg</image:loc>
+      <image:title>Watch The End of Oak Street Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -320,23 +320,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1204680</loc>
-    <lastmod>2026-08-20</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1240889</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg</image:loc>
-      <image:title>Coyote vs. Acme</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/kereiSEFjFa2Rc0hIVpfeqwuXq4.jpg</image:loc>
+      <image:title>Teenage Sex and Death at Camp Miasma</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1204680/watch</loc>
-    <lastmod>2026-08-20</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1240889/watch</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg</image:loc>
-      <image:title>Watch Coyote vs. Acme Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/kereiSEFjFa2Rc0hIVpfeqwuXq4.jpg</image:loc>
+      <image:title>Watch Teenage Sex and Death at Camp Miasma Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -360,43 +360,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1240889</loc>
-    <lastmod>2026-08-06</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1263337</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/kereiSEFjFa2Rc0hIVpfeqwuXq4.jpg</image:loc>
-      <image:title>Teenage Sex and Death at Camp Miasma</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/1ApfSA8JTqeha3GTFEY8syV4auq.jpg</image:loc>
+      <image:title>Heart of the Beast</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1240889/watch</loc>
-    <lastmod>2026-08-06</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1263337/watch</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/kereiSEFjFa2Rc0hIVpfeqwuXq4.jpg</image:loc>
-      <image:title>Watch Teenage Sex and Death at Camp Miasma Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/1339713</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg</image:loc>
-      <image:title>Obsession</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/1339713/watch</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg</image:loc>
-      <image:title>Watch Obsession Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/1ApfSA8JTqeha3GTFEY8syV4auq.jpg</image:loc>
+      <image:title>Watch Heart of the Beast Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -420,43 +400,43 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1124142</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1339713</loc>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/3iVDCDS1VwHIm95PjWEPwsfdhaf.jpg</image:loc>
-      <image:title>The Rivals of Amziah King</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg</image:loc>
+      <image:title>Obsession</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1124142/watch</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1339713/watch</loc>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/3iVDCDS1VwHIm95PjWEPwsfdhaf.jpg</image:loc>
-      <image:title>Watch The Rivals of Amziah King Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg</image:loc>
+      <image:title>Watch Obsession Online Free</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1058424</loc>
-    <lastmod>2026-07-15</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1465063</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1n37BJchWHLiSYQkuFxe5KjB951.jpg</image:loc>
-      <image:title>Hope</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg</image:loc>
+      <image:title>Forgotten Island</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1058424/watch</loc>
-    <lastmod>2026-07-15</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1465063/watch</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1n37BJchWHLiSYQkuFxe5KjB951.jpg</image:loc>
-      <image:title>Watch Hope Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg</image:loc>
+      <image:title>Watch Forgotten Island Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -480,23 +460,43 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1400940</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1058424</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg</image:loc>
-      <image:title>Clayface</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/1n37BJchWHLiSYQkuFxe5KjB951.jpg</image:loc>
+      <image:title>Hope</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1400940/watch</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1058424/watch</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg</image:loc>
-      <image:title>Watch Clayface Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/1n37BJchWHLiSYQkuFxe5KjB951.jpg</image:loc>
+      <image:title>Watch Hope Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/1124142</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/3iVDCDS1VwHIm95PjWEPwsfdhaf.jpg</image:loc>
+      <image:title>The Rivals of Amziah King</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/1124142/watch</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/3iVDCDS1VwHIm95PjWEPwsfdhaf.jpg</image:loc>
+      <image:title>Watch The Rivals of Amziah King Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -520,23 +520,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1083381</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1204680</loc>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg</image:loc>
-      <image:title>Backrooms</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg</image:loc>
+      <image:title>Coyote vs. Acme</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1083381/watch</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1204680/watch</loc>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg</image:loc>
-      <image:title>Watch Backrooms Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg</image:loc>
+      <image:title>Watch Coyote vs. Acme Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -580,26 +580,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1302904</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg</image:loc>
-      <image:title>Practical Magic 2</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/1302904/watch</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg</image:loc>
-      <image:title>Watch Practical Magic 2 Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://streamflixbd.vercel.app/movie/1084244</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -620,43 +600,63 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1465063</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1302904</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg</image:loc>
-      <image:title>Forgotten Island</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg</image:loc>
+      <image:title>Practical Magic 2</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1465063/watch</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1302904/watch</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg</image:loc>
-      <image:title>Watch Forgotten Island Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg</image:loc>
+      <image:title>Watch Practical Magic 2 Online Free</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1263337</loc>
-    <lastmod>2026-09-19</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1083381</loc>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1ApfSA8JTqeha3GTFEY8syV4auq.jpg</image:loc>
-      <image:title>Heart of the Beast</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg</image:loc>
+      <image:title>Backrooms</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/1263337/watch</loc>
-    <lastmod>2026-09-19</lastmod>
+    <loc>https://streamflixbd.vercel.app/movie/1083381/watch</loc>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1ApfSA8JTqeha3GTFEY8syV4auq.jpg</image:loc>
-      <image:title>Watch Heart of the Beast Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg</image:loc>
+      <image:title>Watch Backrooms Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/687163</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/yihdXomYb5kTeSivtFndMy5iDmf.jpg</image:loc>
+      <image:title>Project Hail Mary</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/movie/687163/watch</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/yihdXomYb5kTeSivtFndMy5iDmf.jpg</image:loc>
+      <image:title>Watch Project Hail Mary Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -1020,26 +1020,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/movie/687163</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/yihdXomYb5kTeSivtFndMy5iDmf.jpg</image:loc>
-      <image:title>Project Hail Mary</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/687163/watch</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/yihdXomYb5kTeSivtFndMy5iDmf.jpg</image:loc>
-      <image:title>Watch Project Hail Mary Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://streamflixbd.vercel.app/movie/755898</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1217,26 +1197,6 @@
     <image:image>
       <image:loc>https://image.tmdb.org/t/p/w780/uwMKWjcNID0D9jjplsjkQS2OrB4.jpg</image:loc>
       <image:title>Watch The Mandalorian and Grogu Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/264980</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1WGq9cMuj09tnTJ5wdkINOJff04.jpg</image:loc>
-      <image:title>Loves of a French Pussycat</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/movie/264980/watch</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/1WGq9cMuj09tnTJ5wdkINOJff04.jpg</image:loc>
-      <image:title>Watch Loves of a French Pussycat Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -1780,23 +1740,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/108978</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/95350</loc>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg</image:loc>
-      <image:title>Reacher</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/gpC7h43xPMEV3goYMQShfJbTtLq.jpg</image:loc>
+      <image:title>Lanterns</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/108978/watch</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/95350/watch</loc>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg</image:loc>
-      <image:title>Watch Reacher Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/gpC7h43xPMEV3goYMQShfJbTtLq.jpg</image:loc>
+      <image:title>Watch Lanterns Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -1820,26 +1780,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/95350</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/gpC7h43xPMEV3goYMQShfJbTtLq.jpg</image:loc>
-      <image:title>Lanterns</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/95350/watch</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/gpC7h43xPMEV3goYMQShfJbTtLq.jpg</image:loc>
-      <image:title>Watch Lanterns Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://streamflixbd.vercel.app/tv/275102</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -1857,6 +1797,26 @@
     <image:image>
       <image:loc>https://image.tmdb.org/t/p/w780/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg</image:loc>
       <image:title>Watch The Scandal Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/108978</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg</image:loc>
+      <image:title>Reacher</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/108978/watch</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg</image:loc>
+      <image:title>Watch Reacher Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -1905,7 +1865,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/pbjUYxmI2BdqpXpr89XaBnKlc6F.jpg</image:loc>
+      <image:loc>https://image.tmdb.org/t/p/w780/eyK6fy2NWfjmyBjUvRAR14FynPK.jpg</image:loc>
       <image:title>Has Fallen</image:title>
     </image:image>
   </url>
@@ -1915,8 +1875,28 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/pbjUYxmI2BdqpXpr89XaBnKlc6F.jpg</image:loc>
+      <image:loc>https://image.tmdb.org/t/p/w780/eyK6fy2NWfjmyBjUvRAR14FynPK.jpg</image:loc>
       <image:title>Watch Has Fallen Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/239618</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/kVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg</image:loc>
+      <image:title>American Hostage</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/239618/watch</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/kVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg</image:loc>
+      <image:title>Watch American Hostage Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -1940,43 +1920,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/332401</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/30984</loc>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg</image:loc>
-      <image:title>City of Blood</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg</image:loc>
+      <image:title>Bleach</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/332401/watch</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/30984/watch</loc>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg</image:loc>
-      <image:title>Watch City of Blood Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/224263</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg</image:loc>
-      <image:title>Stranger Things: Tales from &apos;85</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/224263/watch</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg</image:loc>
-      <image:title>Watch Stranger Things: Tales from &apos;85 Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg</image:loc>
+      <image:title>Watch Bleach Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -2000,103 +1960,23 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/30984</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/332401</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg</image:loc>
-      <image:title>Bleach</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg</image:loc>
+      <image:title>City of Blood</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/30984/watch</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/332401/watch</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg</image:loc>
-      <image:title>Watch Bleach Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/125988</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg</image:loc>
-      <image:title>Silo</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/125988/watch</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg</image:loc>
-      <image:title>Watch Silo Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/97546</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/uRHsiw1wLxPHFXkkv4Ix1s0O6f4.jpg</image:loc>
-      <image:title>Ted Lasso</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/97546/watch</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/uRHsiw1wLxPHFXkkv4Ix1s0O6f4.jpg</image:loc>
-      <image:title>Watch Ted Lasso Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/287620</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/txj8ujTZwGUjpCdhCsQBnTlh4aS.jpg</image:loc>
-      <image:title>Stuart Fails to Save the Universe</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/287620/watch</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/txj8ujTZwGUjpCdhCsQBnTlh4aS.jpg</image:loc>
-      <image:title>Watch Stuart Fails to Save the Universe Online Free</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/615</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg</image:loc>
-      <image:title>Futurama</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://streamflixbd.vercel.app/tv/615/watch</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg</image:loc>
-      <image:title>Watch Futurama Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg</image:loc>
+      <image:title>Watch City of Blood Online Free</image:title>
     </image:image>
   </url>
   <url>
@@ -2120,23 +2000,103 @@
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/196322</loc>
-    <lastmod>2024-05-07</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/615</loc>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/2DPmTlv8F0V1TQBPmlsGOVOhtWk.jpg</image:loc>
-      <image:title>Dark Matter</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg</image:loc>
+      <image:title>Futurama</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://streamflixbd.vercel.app/tv/196322/watch</loc>
-    <lastmod>2024-05-07</lastmod>
+    <loc>https://streamflixbd.vercel.app/tv/615/watch</loc>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://image.tmdb.org/t/p/w780/2DPmTlv8F0V1TQBPmlsGOVOhtWk.jpg</image:loc>
-      <image:title>Watch Dark Matter Online Free</image:title>
+      <image:loc>https://image.tmdb.org/t/p/w780/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg</image:loc>
+      <image:title>Watch Futurama Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/224263</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg</image:loc>
+      <image:title>Stranger Things: Tales from &apos;85</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/224263/watch</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg</image:loc>
+      <image:title>Watch Stranger Things: Tales from &apos;85 Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/282326</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/euBlF64efQmsl2y54LeNmLQPNob.jpg</image:loc>
+      <image:title>Against the Current</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/282326/watch</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/euBlF64efQmsl2y54LeNmLQPNob.jpg</image:loc>
+      <image:title>Watch Against the Current Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/207484</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/1pGBdq4ssO2p5H2WFMlADH6pwZ6.jpg</image:loc>
+      <image:title>Outlander: Blood of My Blood</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/207484/watch</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/1pGBdq4ssO2p5H2WFMlADH6pwZ6.jpg</image:loc>
+      <image:title>Watch Outlander: Blood of My Blood Online Free</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/125988</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg</image:loc>
+      <image:title>Silo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://streamflixbd.vercel.app/tv/125988/watch</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://image.tmdb.org/t/p/w780/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg</image:loc>
+      <image:title>Watch Silo Online Free</image:title>
     </image:image>
   </url>
   <url>

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
@@ -68,21 +68,83 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
         <div class="nav-right">
           <ng-container *ngIf="currentUser$ | async as user; else guestTpl">
             <div class="user-profile-menu">
+              <!-- Admin quick badge (desktop & mobile header) -->
+              <a *ngIf="(isAdmin$ | async) || user.role === 'admin'" routerLink="/admin" class="admin-chip" title="Admin Portal">
+                🛡️ Admin Panel
+              </a>
+
+              <!-- Notifications -->
               <a routerLink="/notifications" class="btn-notif" title="Notifications">
                 🔔
               </a>
-              <a *ngIf="(currentUser$ | async) && (isAdmin$ | async)" routerLink="/admin" class="admin-chip" title="Admin Portal">
-                🛡️ Admin
-              </a>
-              <a routerLink="/profile" class="user-profile-link" title="My Profile">
-                <div class="user-avatar">
-                  {{ getUserInitial(user) }}
+
+              <!-- Interactive User Menu with Popover -->
+              <div class="user-dropdown-wrapper">
+                <button class="user-profile-btn" (click)="toggleUserMenu($event)" title="User Account Menu" type="button">
+                  <div class="user-avatar">
+                    {{ getUserInitial(user) }}
+                  </div>
+                  <span class="user-name">{{ getUserName(user) }}</span>
+                  <span class="dropdown-chevron" [class.open]="userMenuOpen">▾</span>
+                </button>
+
+                <!-- Floating Dropdown Menu -->
+                <div class="user-dropdown-popover" *ngIf="userMenuOpen" (click)="$event.stopPropagation()">
+                  <div class="popover-user-card">
+                    <div class="popover-avatar">{{ getUserInitial(user) }}</div>
+                    <div class="popover-meta">
+                      <div class="popover-name">{{ getUserName(user) }}</div>
+                      <div class="popover-email">{{ user.email || user.phoneNumber || '' }}</div>
+                      <span class="popover-role-tag" [class.admin]="(isAdmin$ | async) || user.role === 'admin'">
+                        {{ ((isAdmin$ | async) || user.role === 'admin') ? '🛡️ Administrator' : '👤 Member' }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="popover-divider"></div>
+
+                  <a *ngIf="(isAdmin$ | async) || user.role === 'admin'" routerLink="/admin" (click)="userMenuOpen = false" class="popover-link popover-admin-highlight">
+                    <span class="popover-icon">🛡️</span>
+                    <div class="popover-link-text">
+                      <span class="plt-main">Admin Dashboard</span>
+                      <span class="plt-desc">Manage site, users & media</span>
+                    </div>
+                  </a>
+
+                  <a routerLink="/profile" (click)="userMenuOpen = false" class="popover-link">
+                    <span class="popover-icon">👤</span>
+                    <div class="popover-link-text">
+                      <span class="plt-main">My Profile</span>
+                      <span class="plt-desc">Account & settings</span>
+                    </div>
+                  </a>
+
+                  <a routerLink="/my-list" (click)="userMenuOpen = false" class="popover-link">
+                    <span class="popover-icon">📑</span>
+                    <div class="popover-link-text">
+                      <span class="plt-main">My Watchlist</span>
+                      <span class="plt-desc">Saved movies & series</span>
+                    </div>
+                  </a>
+
+                  <a routerLink="/notifications" (click)="userMenuOpen = false" class="popover-link">
+                    <span class="popover-icon">🔔</span>
+                    <div class="popover-link-text">
+                      <span class="plt-main">Notifications</span>
+                      <span class="plt-desc">Updates & announcements</span>
+                    </div>
+                  </a>
+
+                  <div class="popover-divider"></div>
+
+                  <button (click)="logout(); userMenuOpen = false" class="popover-link popover-logout" type="button">
+                    <span class="popover-icon">🚪</span>
+                    <div class="popover-link-text">
+                      <span class="plt-main">Sign Out</span>
+                    </div>
+                  </button>
                 </div>
-                <span class="user-name">{{ getUserName(user) }}</span>
-              </a>
-              <button (click)="logout()" class="btn-logout" title="Sign Out">
-                Sign Out
-              </button>
+              </div>
             </div>
           </ng-container>
 
@@ -108,14 +170,30 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
         <a routerLink="/tv" routerLinkActive="active" class="mob-link">📺 TV Series</a>
         <a routerLink="/search" routerLinkActive="active" class="mob-link">🔍 Search</a>
         <a routerLink="/my-list" routerLinkActive="active" class="mob-link">📑 My List</a>
+
         <ng-container *ngIf="currentUser$ | async as user">
-          <a routerLink="/profile" class="mob-link">👤 My Profile</a>
-          <a routerLink="/notifications" class="mob-link">🔔 Notifications</a>
-          <a *ngIf="isAdmin$ | async" routerLink="/admin" routerLinkActive="active" class="mob-link mob-admin">🛡️ Admin Panel</a>
+          <div class="mob-divider"></div>
+          <div class="mob-user-card">
+            <div class="mob-user-avatar">{{ getUserInitial(user) }}</div>
+            <div class="mob-user-info">
+              <div class="mob-user-name">{{ getUserName(user) }}</div>
+              <div class="mob-user-email">{{ user.email || user.phoneNumber }}</div>
+              <span class="mob-user-badge" [class.admin]="(isAdmin$ | async) || user.role === 'admin'">
+                {{ ((isAdmin$ | async) || user.role === 'admin') ? '🛡️ Administrator' : '👤 Member' }}
+              </span>
+            </div>
+          </div>
+          <a *ngIf="(isAdmin$ | async) || user.role === 'admin'" routerLink="/admin" routerLinkActive="active" class="mob-link mob-admin">
+            🛡️ Admin Panel
+          </a>
+          <a routerLink="/profile" routerLinkActive="active" class="mob-link">👤 My Profile</a>
+          <a routerLink="/notifications" routerLinkActive="active" class="mob-link">🔔 Notifications</a>
           <div class="mob-divider"></div>
           <button (click)="logout()" class="mob-link mob-logout">🚪 Sign Out</button>
         </ng-container>
+
         <ng-container *ngIf="!(currentUser$ | async)">
+          <div class="mob-divider"></div>
           <a routerLink="/login" class="mob-link mob-signin">Sign In</a>
           <a routerLink="/register" class="mob-link mob-signup">Sign Up Free</a>
         </ng-container>
@@ -212,13 +290,21 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
         <span class="tab-icon">📺</span>
         <span class="tab-text">Series</span>
       </a>
-      <a routerLink="/search" routerLinkActive="active" class="mobile-tab">
-        <span class="tab-icon">🔍</span>
-        <span class="tab-text">Search</span>
+      <a *ngIf="(isAdmin$ | async)" routerLink="/admin" routerLinkActive="active" class="mobile-tab tab-admin">
+        <span class="tab-icon">🛡️</span>
+        <span class="tab-text">Admin</span>
       </a>
-      <a routerLink="/my-list" routerLinkActive="active" class="mobile-tab">
+      <a *ngIf="!(isAdmin$ | async)" routerLink="/my-list" routerLinkActive="active" class="mobile-tab">
         <span class="tab-icon">📑</span>
         <span class="tab-text">My List</span>
+      </a>
+      <a *ngIf="currentUser$ | async" routerLink="/profile" routerLinkActive="active" class="mobile-tab">
+        <span class="tab-icon">👤</span>
+        <span class="tab-text">Profile</span>
+      </a>
+      <a *ngIf="!(currentUser$ | async)" routerLink="/login" routerLinkActive="active" class="mobile-tab">
+        <span class="tab-icon">🔑</span>
+        <span class="tab-text">Sign In</span>
       </a>
     </nav>
 
@@ -465,11 +551,259 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
       align-items: center;
       gap: 0.25rem;
       transition: all 0.2s ease;
+      white-space: nowrap;
     }
     .admin-chip:hover {
       background: rgba(245, 158, 11, 0.25);
       border-color: #fbbf24;
       transform: translateY(-1px);
+    }
+
+    .user-dropdown-wrapper {
+      position: relative;
+    }
+
+    .user-profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 0.25rem 0.65rem 0.25rem 0.25rem;
+      cursor: pointer;
+      color: #f1f5f9;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .user-profile-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .dropdown-chevron {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      transition: transform 0.2s ease;
+    }
+    .dropdown-chevron.open {
+      transform: rotate(180deg);
+    }
+
+    .user-dropdown-popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 260px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      z-index: 1100;
+      padding: 0.5rem;
+      backdrop-filter: blur(16px);
+      animation: popoverFadeIn 0.18s ease-out;
+    }
+
+    @keyframes popoverFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .popover-user-card {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0.6rem 0.5rem;
+    }
+
+    .popover-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .popover-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .popover-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popover-email {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popover-role-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+    }
+
+    .popover-role-tag.admin {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .popover-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 0.35rem 0;
+    }
+
+    .popover-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.5rem 0.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #cbd5e1;
+      font-family: inherit;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .popover-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .popover-admin-highlight {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .popover-admin-highlight:hover {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fcd34d;
+    }
+
+    .popover-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .popover-link-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plt-main {
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .plt-desc {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+
+    .popover-logout {
+      color: #f87171;
+    }
+
+    .popover-logout:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: #fca5a5;
+    }
+
+    .mob-user-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      margin: 0.25rem 0 0.5rem;
+    }
+
+    .mob-user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .mob-user-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mob-user-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mob-user-email {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mob-user-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      margin-top: 0.2rem;
+    }
+
+    .mob-user-badge.admin {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .tab-admin {
+      color: #fbbf24 !important;
     }
 
     .user-avatar {
@@ -483,6 +817,7 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
       font-size: 0.9rem;
       font-weight: 700;
       color: #ffffff;
+      flex-shrink: 0;
     }
 
     .user-name {
@@ -856,10 +1191,11 @@ import { LiveChatWidgetComponent } from './shared/components/live-chat-widget.co
       .page-body { padding-bottom: 70px; }
       .page-body.admin-mode { padding-bottom: 0 !important; }
       .user-name { display: none; }
+      .dropdown-chevron { display: none; }
       .btn-logout { display: none; }
       .guest-actions { display: none; }
-      /* Hide desktop-only items on mobile header */
-      .admin-chip { display: none; }
+      /* Keep admin chip visible on mobile */
+      .admin-chip { display: inline-flex; font-size: 0.68rem; padding: 0.2rem 0.5rem; }
       .btn-notif { display: none; }
       .nav-right { gap: 0.5rem; }
     }
@@ -897,6 +1233,20 @@ export class AppComponent implements OnInit {
   readonly isAdminRoute = signal<boolean>(false);
   readonly isHomePage = signal<boolean>(false);
   mobileNavOpen = false;
+  userMenuOpen = false;
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.user-dropdown-wrapper')) {
+      this.userMenuOpen = false;
+    }
+  }
+
+  toggleUserMenu(e: Event): void {
+    e.stopPropagation();
+    this.userMenuOpen = !this.userMenuOpen;
+  }
 
   ngOnInit(): void {
     this.visitorService.startTracking();

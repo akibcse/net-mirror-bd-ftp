@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
+    "dev": "ng serve",
     "start": "ng serve",
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "ng build",

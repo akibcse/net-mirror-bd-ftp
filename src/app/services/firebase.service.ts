@@ -12,23 +12,18 @@ export class FirebaseService {
   public readonly app: FirebaseApp;
   public readonly auth: Auth;
   public readonly firestore: Firestore;
-  public readonly db!: Database;
+  public readonly db: Database;
 
   constructor() {
     this.app = getApps().length > 0 ? getApps()[0] : initializeApp(environment.firebase);
     this.auth = getAuth(this.app);
     this.firestore = getFirestore(this.app);
+    const rtdbUrl = (environment.firebase as any).databaseURL
+      || `https://${environment.firebase.projectId}-default-rtdb.asia-southeast1.firebasedatabase.app`;
     try {
-      const rtdbUrl = (environment.firebase as any).databaseURL || `https://${environment.firebase.projectId}-default-rtdb.firebaseio.com`;
       this.db = getDatabase(this.app, rtdbUrl);
     } catch {
-      // Graceful fallback if RTDB is not configured
-      try {
-        this.db = getDatabase(this.app);
-      } catch {
-        // Realtime DB uninitialized
-      }
+      this.db = getDatabase(this.app);
     }
   }
 }
-

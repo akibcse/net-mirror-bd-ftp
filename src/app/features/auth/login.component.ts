@@ -70,17 +70,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     const { email, password } = this.loginForm.getRawValue();
 
     try {
-      await this.auth.login(email!, password!);
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      const user = await this.auth.login(email!, password!);
+      let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+      if (!returnUrl || returnUrl === '/') {
+        if (user.role === 'admin' || this.auth.checkIsAdmin(user.email)) {
+          returnUrl = '/admin';
+        } else {
+          returnUrl = '/';
+        }
+      }
       this.router.navigateByUrl(returnUrl);
     } catch (err: any) {
       const code = err?.code || '';
       // If admin email not found — auto-create their account on first login attempt
-      const isAdminEmail = (environment.adminEmails || []).map(e => e.toLowerCase()).includes((email || '').toLowerCase());
+      const isAdminEmail = this.auth.checkIsAdmin(email);
       if ((code === 'auth/user-not-found' || code === 'auth/invalid-credential') && isAdminEmail) {
         try {
-          await this.auth.register(email!, password!, 'Admin');
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const user = await this.auth.register(email!, password!, 'Admin');
+          let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+          if (!returnUrl || returnUrl === '/') {
+            returnUrl = '/admin';
+          }
           this.router.navigateByUrl(returnUrl);
           return;
         } catch (regErr: any) {
@@ -100,8 +110,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage.set(null);
 
     try {
-      await this.auth.loginWithGoogle();
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      const user = await this.auth.loginWithGoogle();
+      let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+      if (!returnUrl || returnUrl === '/') {
+        if (user.role === 'admin' || this.auth.checkIsAdmin(user.email)) {
+          returnUrl = '/admin';
+        } else {
+          returnUrl = '/';
+        }
+      }
       this.router.navigateByUrl(returnUrl);
     } catch (err: any) {
       this.errorMessage.set(this.formatAuthError(err));
@@ -156,8 +173,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage.set(null);
 
     try {
-      await this.auth.verifyPhoneOtp(this.confirmationResult, code);
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      const user = await this.auth.verifyPhoneOtp(this.confirmationResult, code);
+      let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+      if (!returnUrl || returnUrl === '/') {
+        if (user.role === 'admin' || this.auth.checkIsAdmin(user.email)) {
+          returnUrl = '/admin';
+        } else {
+          returnUrl = '/';
+        }
+      }
       this.router.navigateByUrl(returnUrl);
     } catch (err: any) {
       this.errorMessage.set(this.formatAuthError(err));
